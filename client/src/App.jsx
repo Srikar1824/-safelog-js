@@ -15,7 +15,7 @@ export default function App() {
   useEffect(() => {
     // Fetch the real safelog-js version from the server
     axios
-      .get("/api/health")
+      .get(`${import.meta.env.VITE_API_URL || ""}/api/health`)
       .then(({ data }) => {
         setSafelogVersion(data.safelogVersion);
       })

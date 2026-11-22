@@ -38,14 +38,14 @@ export default function CustomRedactorTab() {
     }
 
     try {
-      const { data } = await axios.post("/api/create-redactor", {
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL || ""}/api/create-redactor`, {
         sensitiveKeys,
         replacement: replacement || "[HIDDEN]",
         inputs,
       });
       setResult(data);
     } catch (err) {
-      setError(err.response?.data?.error || "Server error");
+      setError(err.response?.data?.error || err.message || "Server error");
     } finally {
       setLoading(false);
     }

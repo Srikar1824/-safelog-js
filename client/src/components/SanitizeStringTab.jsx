@@ -31,13 +31,13 @@ export default function SanitizeStringTab() {
     }
 
     try {
-      const { data } = await axios.post("/api/sanitize-string", {
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL || ""}/api/sanitize-string`, {
         str: input,
         replacement: replacement || "[REDACTED]",
       });
       setResult(data);
     } catch (err) {
-      setError(err.response?.data?.error || "Server error");
+      setError(err.response?.data?.error || err.message || "Server error");
     } finally {
       setLoading(false);
     }

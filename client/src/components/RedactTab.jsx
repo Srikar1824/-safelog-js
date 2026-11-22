@@ -41,14 +41,14 @@ export default function RedactTab() {
     }
 
     try {
-      const { data } = await axios.post("/api/redact", {
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL || ""}/api/redact`, {
         data: parsed,
         sensitiveKeys,
         replacement: replacement || "******",
       });
       setResult(data);
     } catch (err) {
-      setError(err.response?.data?.error || "Server error");
+      setError(err.response?.data?.error || err.message || "Server error");
     } finally {
       setLoading(false);
     }
