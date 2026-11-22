@@ -2,7 +2,7 @@
 
 > An interactive showcase website for the [safelog-js](https://www.npmjs.com/package/safelog-js) NPM package.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-4ade80?style=for-the-badge)](https://safelog-demo.onrender.com)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-4ade80?style=for-the-badge)](https://safelog-playground.vercel.app)
 [![NPM](https://img.shields.io/npm/v/safelog-js?style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/safelog-js)
 [![GitHub](https://img.shields.io/badge/Package-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/Srikar1824/safelog)
 
