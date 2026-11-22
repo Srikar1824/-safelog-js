@@ -11,7 +11,15 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://safelog-playground.vercel.app",
+    /\.vercel\.app$/,
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+}));
 app.use(express.json({ limit: "1mb" }));
 
 // ─── Health Check ─────────────────────────────────────────────────────────────
@@ -143,9 +151,13 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: "Internal server error" });
 });
 
-// ─── Start ────────────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  const pkg = require("safelog-js/package.json");
-  console.log(`✅  SafeLog API server running on http://localhost:${PORT}`);
-  console.log(`📦  Using safelog-js v${pkg.version}`);
-});
+module.exports = app;
+
+// Local `node index.js` only. Vercel imports this file as a serverless function.
+if (require.main === module && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    const pkg = require("safelog-js/package.json");
+    console.log(`✅  SafeLog API server running on http://localhost:${PORT}`);
+    console.log(`📦  Using safelog-js v${pkg.version}`);
+  });
+}
